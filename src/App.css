@@ -1,19 +1,27 @@
-
-.app {
+* {
   background-color: #282c34;
-  display: grid;
-  grid-template-areas: 
-    "header header"
-    "sidebar main";
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: 60px 1fr;
-  height: 100vh;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
+.voting-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
+.emoji img {
+  width: 100px;
+  height: 100px;
+}
 
+.emoji {
+  cursor: pointer;
+  margin: 5px;
+  text-align: center;
+}
 
-
+.counter {
+  font-size: 100px;
+}
 
