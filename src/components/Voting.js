@@ -1,36 +1,32 @@
 import React, { useState } from 'react';
 import Emoji from './Emoji';
 
-function Voting() {
-    const [emojis, setEmojis] = useState([
-        { id: 1, src: 'assets/images/1.jpg', alt: 'Emoji 1', votes: 0},
-        { id: 2, src: 'assets/images/2.jpg', alt: 'Emoji 2', votes: 0},
-        { id: 3, src: 'assets/images/3.jpeg', alt: 'Emoji 3', votes: 0},
-        { id: 4, src: 'assets/images/4.jpeg', alt: 'Emoji 4', votes: 0},
-        { id: 5, src: 'assets/images/5.jpeg', alt: 'Emoji 5', votes: 0},
-    ]);
+function Voting({ emojis }) {
 
-    const [winnerId, setWinnerId] = useState(null);
+    const [localEmojis, setLocalEmojis] = useState(emojis);
   
+    const [winnerId, setWinnerId] = useState(null);
+    
     const handleVote = id => {
-      const updatedEmojis = emojis.map(emoji => {
+      const updatedEmojis = localEmojis.map(emoji => {
         if (emoji.id === id) {
           return { ...emoji, votes: emoji.votes + 1 };
         }
         return emoji;
       });
-      setEmojis(updatedEmojis);
+
+      setLocalEmojis(updatedEmojis);
     };
   
     const showResults = () => {
-      const maxVotes = Math.max(...emojis.map(emoji => emoji.votes));
-      const winner = emojis.find(emoji => emoji.votes === maxVotes);
+      const maxVotes = Math.max(...localEmojis.map(emoji => emoji.votes));
+      const winner = localEmojis.find(emoji => emoji.votes === maxVotes);
       setWinnerId(winner.id);
     };
   
     return (
       <div className="voting-container">
-        {emojis.map((emoji) => (
+        {localEmojis.map((emoji) => (
           <div key={emoji.id} style={{ display: winnerId && winnerId !== emoji.id ? 'none' : 'block' }}>
             <Emoji 
               src={emoji.src} 
